@@ -10,10 +10,13 @@ class GerenteDeProducao extends Usuario {
     }
 
     monitorarEstoque(estoque: Estoque): void {
-
+        console.log("Produtos no estoque:");
+        estoque.produtos.forEach(produto => {
+            console.log(`- ${produto.nome}: ${produto.quantidade}`);
+        });
     }
 
     solicitarReposicao(estoque: Estoque): void {
-
+        estoque.reposicao = true;
     }
 }  

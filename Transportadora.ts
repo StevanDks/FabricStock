@@ -15,7 +15,7 @@ class Transportadora {
         this.Pedidos = [];
     }
 
-    atualizarStatusEntrega(pedidos: Pedido[]): void {
+    atualizarStatusEntrega(pedidos: Pedido[], idPedido: number): void {
 
     }
 
