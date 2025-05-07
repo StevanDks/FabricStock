@@ -2,10 +2,12 @@ import { Usuario } from "./Usuario";
 import { Pedido } from "./Pedido";
 
 class Fornecedor extends Usuario {
+    CNPJ: number;
     Pedidos: Pedido[] = [];
 
-    constructor(id: number, nome: string, email: string, senha: string) {
+    constructor(id: number, nome: string, email: string, senha: string, CNPJ: number) {
         super(id, nome, email, senha, 1);
+        this.CNPJ = CNPJ;
     }
 
     recebePedidos(pedido: Pedido): void {
@@ -26,15 +28,16 @@ class Fornecedor extends Usuario {
         });
     }
 
-    atualizarStatusEntrega(pedidos: Pedido[]): void {
-        pedidos.forEach(pedido => {
-            if (pedido.status === 'Em Transporte') {
-                pedido.status = 'Entregue';
-            } else if (pedido.status === 'Pendente') {
-                pedido.status = 'Em Transporte';
-            } else {
-                console.log(`Pedido ID: ${pedido.id} já está com status: ${pedido.status}`);
-            }
-        });
+    atualizarStatusEntrega(pedidos: Pedido[], idPedido: number): void {
+        const pedido = pedidos.find(p => p.id === idPedido);
+        if (pedido?.status === 'Em Transporte') {
+            pedido.status = "Entregue";
+            console.log(`Pedido ${pedido.id} entregue com sucesso!`);
+        } else if (pedido?.status === 'Pendente') {
+            pedido.status = "Em Transporte";
+            console.log(`Pedido ${idPedido} em transporte.`);
+        } else {
+            console.log(`Pedido ID: ${pedido?.id} já está com status: ${pedido?.status}`);
+        }
     }
 }

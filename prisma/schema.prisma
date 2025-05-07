@@ -1,0 +1,127 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum TipoDeUsuario {
+  Administrador
+  GerenteDeEstoque
+  GerenteDeProducao
+  Fornecedor
+}
+
+model Usuario {
+  IdUsuario         Int                @id @default(autoincrement())
+  Nome              String
+  Email             String             @unique
+  Senha             String
+  NiveldePermissao  Int
+  TipoDeUsuario     TipoDeUsuario
+  Fornecedor        Fornecedor?        @relation("Fornecedor")
+  GerenteDeProducao GerenteDeProducao? @relation("GerenteDeProducao")
+  GerenteDeEstoque  GerenteDeEstoque?  @relation("GerenteDeEstoque")
+  Administrador     Administrador?     @relation("Administrador")
+}
+
+model Fornecedor {
+  IdFornecedor Int      @id @default(autoincrement())
+  Usuario      Usuario  @relation("Fornecedor", fields: [IdFornecedor], references: [IdUsuario])
+  CNPJ         Float    @unique
+  Pedidos      Pedido[]
+}
+
+model GerenteDeProducao {
+  IdGerenteDeProducao Int      @id @default(autoincrement())
+  Usuario             Usuario  @relation("GerenteDeProducao", fields: [IdGerenteDeProducao], references: [IdUsuario])
+  Pedidos             Pedido[]
+}
+
+model GerenteDeEstoque {
+  IdGerenteDeEstoque Int     @id @default(autoincrement())
+  Usuario            Usuario @relation("GerenteDeEstoque", fields: [IdGerenteDeEstoque], references: [IdUsuario])
+}
+
+model Administrador {
+  IdAdministrador Int     @id @default(autoincrement())
+  Usuario         Usuario @relation("Administrador", fields: [IdAdministrador], references: [IdUsuario])
+}
+
+enum TipoDeProduto {
+  ProdutoFinal
+  MateriaPrima
+}
+
+model Produto {
+  IdProduto   Int           @id @default(autoincrement())
+  Nome        String
+  Quantidade  Int
+  Tipo        TipoDeProduto
+  PedidoId    Int
+  ProdutoLote ProdutoLote[]
+  Pedido      Pedido        @relation(fields: [PedidoId], references: [IdPedido])
+  Lotes       Lote[]        @relation("ProdutoLotes")
+}
+
+model Lote {
+  IdLote      Int           @id @default(autoincrement())
+  Data        DateTime
+  Quantidade  Int
+  EstoqueId   Int
+  Estoque     Estoque       @relation(fields: [EstoqueId], references: [IdEstoque])
+  ProdutoLote ProdutoLote[]
+  Produtos    Produto[]     @relation("ProdutoLotes")
+}
+
+model ProdutoLote {
+  produtoId Int
+  loteId    Int
+  Produto   Produto @relation(fields: [produtoId], references: [IdProduto])
+  Lote      Lote    @relation(fields: [loteId], references: [IdLote])
+
+  @@id([produtoId, loteId])
+}
+
+model Estoque {
+  IdEstoque Int     @id @default(autoincrement())
+  Reposicao Boolean
+  Endereco  String
+  lotes     Lote[]
+}
+
+enum StatusPedido {
+  Pendente
+  EmTransporte
+  Entregue
+}
+
+model Pedido {
+  IdPedido            Int                @id @default(autoincrement())
+  Data                DateTime
+  Status              StatusPedido
+  EnderecoDeEntrega   String
+  Produtos            Produto[]
+  FornecedorId        Int //Chave Estrangeira de Fornecedor
+  TransportadoraId    Int //Chave Estrangeira de Transportadora
+  GerenteDeProducaoId Int //Chave Estrangeira de Gerente de Produção
+  Fornecedor          Fornecedor?        @relation(fields: [FornecedorId], references: [IdFornecedor])
+  Transportadora      Transportadora?    @relation(fields: [TransportadoraId], references: [IdTransportadora])
+  GerenteDeProducao   GerenteDeProducao? @relation(fields: [GerenteDeProducaoId], references: [IdGerenteDeProducao])
+}
+
+model Transportadora {
+  IdTransportadora Int      @id @default(autoincrement())
+  Nome             String
+  Endereco         String
+  Pedidos          Pedido[]
+}
