@@ -22,8 +22,10 @@ class Fornecedor extends Usuario {
                 console.log(`- ${produto.nome}, Quantidade: ${produto.quantidade}`);
             });
             console.log('Materias Primas:');
-            pedido.materiasPrimas.forEach(materiaPrima => {
-                console.log(`- ${materiaPrima.nome}, Quantidade: ${materiaPrima.quantidade}`);
+            pedido.produtos.forEach(produto => {
+                if (produto.tipo === 'MateriaPrima') {
+                    console.log(`- ${produto.nome}, Quantidade: ${produto.quantidade}`);
+                }
             });
         });
     }
