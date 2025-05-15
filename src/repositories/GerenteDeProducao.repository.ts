@@ -26,31 +26,13 @@ export const createGerenteDeProducao = async (data: {
     Senha: string;
     NiveldePermissao: number;
     TipoDeUsuario: TipoDeUsuario;
-    Pedidos?: Array<{
-        Data: Date;
-        Status: StatusPedido;
-        EnderecoDeEntrega: string;
-        FornecedorId: number;
-        TransportadoraId: number;
-    }>;
 }) => {
-    const { Nome, Email, Senha, NiveldePermissao, TipoDeUsuario, Pedidos } = data;
+    const { Nome, Email, Senha, NiveldePermissao, TipoDeUsuario} = data;
     const existingUser = await prisma.usuario.findUnique({
         where: { Email },
     });
     if (existingUser) {
         throw new Error('E-mail já está em uso.');
-    }
-    if (Pedidos && Pedidos.length > 0) {
-        for (const pedido of Pedidos) {
-            const fornecedorExists = await prisma.fornecedor.findUnique({
-                where: { IdFornecedor: pedido.FornecedorId },
-            });
-
-            if (!fornecedorExists) {
-                throw new Error(`Fornecedor com ID ${pedido.FornecedorId} não encontrado.`);
-            }
-        }
     }
     return await prisma.gerenteDeProducao.create({
         data: {
@@ -64,7 +46,7 @@ export const createGerenteDeProducao = async (data: {
                 },
             },
             Pedidos: {
-                create: Pedidos || [],
+                create: [],
             },
 
         },
@@ -84,6 +66,16 @@ export const updateGerenteDeProducao = async (
                 Email?: string;
                 Senha?: string;
             };
+        };
+        Pedidos?: {
+            connect?: { IdPedido: number }[];
+            create?: Array<{
+                Data: Date;
+                Status: StatusPedido;
+                EnderecoDeEntrega: string;
+                FornecedorId: number;
+                TransportadoraId: number;
+            }>;
         };
     }
 ): Promise<GerenteDeProducao> => {

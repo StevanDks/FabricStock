@@ -1886,12 +1886,12 @@ export namespace Prisma {
 
   export type ProdutoCountOutputType = {
     ProdutoLote: number
-    Lotes: number
+    Lote: number
   }
 
   export type ProdutoCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ProdutoLote?: boolean | ProdutoCountOutputTypeCountProdutoLoteArgs
-    Lotes?: boolean | ProdutoCountOutputTypeCountLotesArgs
+    Lote?: boolean | ProdutoCountOutputTypeCountLoteArgs
   }
 
   // Custom InputTypes
@@ -1915,7 +1915,7 @@ export namespace Prisma {
   /**
    * ProdutoCountOutputType without action
    */
-  export type ProdutoCountOutputTypeCountLotesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProdutoCountOutputTypeCountLoteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: LoteWhereInput
   }
 
@@ -7655,7 +7655,7 @@ export namespace Prisma {
     Nome: string
     Quantidade: number
     Tipo: $Enums.TipoDeProduto
-    PedidoId: number
+    PedidoId: number | null
     _count: ProdutoCountAggregateOutputType | null
     _avg: ProdutoAvgAggregateOutputType | null
     _sum: ProdutoSumAggregateOutputType | null
@@ -7684,8 +7684,8 @@ export namespace Prisma {
     Tipo?: boolean
     PedidoId?: boolean
     ProdutoLote?: boolean | Produto$ProdutoLoteArgs<ExtArgs>
-    Pedido?: boolean | PedidoDefaultArgs<ExtArgs>
-    Lotes?: boolean | Produto$LotesArgs<ExtArgs>
+    Pedido?: boolean | Produto$PedidoArgs<ExtArgs>
+    Lote?: boolean | Produto$LoteArgs<ExtArgs>
     _count?: boolean | ProdutoCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["produto"]>
 
@@ -7695,7 +7695,7 @@ export namespace Prisma {
     Quantidade?: boolean
     Tipo?: boolean
     PedidoId?: boolean
-    Pedido?: boolean | PedidoDefaultArgs<ExtArgs>
+    Pedido?: boolean | Produto$PedidoArgs<ExtArgs>
   }, ExtArgs["result"]["produto"]>
 
   export type ProdutoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7704,7 +7704,7 @@ export namespace Prisma {
     Quantidade?: boolean
     Tipo?: boolean
     PedidoId?: boolean
-    Pedido?: boolean | PedidoDefaultArgs<ExtArgs>
+    Pedido?: boolean | Produto$PedidoArgs<ExtArgs>
   }, ExtArgs["result"]["produto"]>
 
   export type ProdutoSelectScalar = {
@@ -7718,30 +7718,30 @@ export namespace Prisma {
   export type ProdutoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"IdProduto" | "Nome" | "Quantidade" | "Tipo" | "PedidoId", ExtArgs["result"]["produto"]>
   export type ProdutoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ProdutoLote?: boolean | Produto$ProdutoLoteArgs<ExtArgs>
-    Pedido?: boolean | PedidoDefaultArgs<ExtArgs>
-    Lotes?: boolean | Produto$LotesArgs<ExtArgs>
+    Pedido?: boolean | Produto$PedidoArgs<ExtArgs>
+    Lote?: boolean | Produto$LoteArgs<ExtArgs>
     _count?: boolean | ProdutoCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProdutoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Pedido?: boolean | PedidoDefaultArgs<ExtArgs>
+    Pedido?: boolean | Produto$PedidoArgs<ExtArgs>
   }
   export type ProdutoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Pedido?: boolean | PedidoDefaultArgs<ExtArgs>
+    Pedido?: boolean | Produto$PedidoArgs<ExtArgs>
   }
 
   export type $ProdutoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Produto"
     objects: {
       ProdutoLote: Prisma.$ProdutoLotePayload<ExtArgs>[]
-      Pedido: Prisma.$PedidoPayload<ExtArgs>
-      Lotes: Prisma.$LotePayload<ExtArgs>[]
+      Pedido: Prisma.$PedidoPayload<ExtArgs> | null
+      Lote: Prisma.$LotePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       IdProduto: number
       Nome: string
       Quantidade: number
       Tipo: $Enums.TipoDeProduto
-      PedidoId: number
+      PedidoId: number | null
     }, ExtArgs["result"]["produto"]>
     composites: {}
   }
@@ -8137,8 +8137,8 @@ export namespace Prisma {
   export interface Prisma__ProdutoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     ProdutoLote<T extends Produto$ProdutoLoteArgs<ExtArgs> = {}>(args?: Subset<T, Produto$ProdutoLoteArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProdutoLotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    Pedido<T extends PedidoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PedidoDefaultArgs<ExtArgs>>): Prisma__PedidoClient<$Result.GetResult<Prisma.$PedidoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    Lotes<T extends Produto$LotesArgs<ExtArgs> = {}>(args?: Subset<T, Produto$LotesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Pedido<T extends Produto$PedidoArgs<ExtArgs> = {}>(args?: Subset<T, Produto$PedidoArgs<ExtArgs>>): Prisma__PedidoClient<$Result.GetResult<Prisma.$PedidoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Lote<T extends Produto$LoteArgs<ExtArgs> = {}>(args?: Subset<T, Produto$LoteArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8593,9 +8593,28 @@ export namespace Prisma {
   }
 
   /**
-   * Produto.Lotes
+   * Produto.Pedido
    */
-  export type Produto$LotesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Produto$PedidoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pedido
+     */
+    select?: PedidoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pedido
+     */
+    omit?: PedidoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PedidoInclude<ExtArgs> | null
+    where?: PedidoWhereInput
+  }
+
+  /**
+   * Produto.Lote
+   */
+  export type Produto$LoteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Lote
      */
@@ -14365,6 +14384,14 @@ export namespace Prisma {
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
   /**
    * Field references
    */
@@ -14716,10 +14743,10 @@ export namespace Prisma {
     Nome?: StringFilter<"Produto"> | string
     Quantidade?: IntFilter<"Produto"> | number
     Tipo?: EnumTipoDeProdutoFilter<"Produto"> | $Enums.TipoDeProduto
-    PedidoId?: IntFilter<"Produto"> | number
+    PedidoId?: IntNullableFilter<"Produto"> | number | null
     ProdutoLote?: ProdutoLoteListRelationFilter
-    Pedido?: XOR<PedidoScalarRelationFilter, PedidoWhereInput>
-    Lotes?: LoteListRelationFilter
+    Pedido?: XOR<PedidoNullableScalarRelationFilter, PedidoWhereInput> | null
+    Lote?: LoteListRelationFilter
   }
 
   export type ProdutoOrderByWithRelationInput = {
@@ -14727,10 +14754,10 @@ export namespace Prisma {
     Nome?: SortOrder
     Quantidade?: SortOrder
     Tipo?: SortOrder
-    PedidoId?: SortOrder
+    PedidoId?: SortOrderInput | SortOrder
     ProdutoLote?: ProdutoLoteOrderByRelationAggregateInput
     Pedido?: PedidoOrderByWithRelationInput
-    Lotes?: LoteOrderByRelationAggregateInput
+    Lote?: LoteOrderByRelationAggregateInput
   }
 
   export type ProdutoWhereUniqueInput = Prisma.AtLeast<{
@@ -14741,10 +14768,10 @@ export namespace Prisma {
     Nome?: StringFilter<"Produto"> | string
     Quantidade?: IntFilter<"Produto"> | number
     Tipo?: EnumTipoDeProdutoFilter<"Produto"> | $Enums.TipoDeProduto
-    PedidoId?: IntFilter<"Produto"> | number
+    PedidoId?: IntNullableFilter<"Produto"> | number | null
     ProdutoLote?: ProdutoLoteListRelationFilter
-    Pedido?: XOR<PedidoScalarRelationFilter, PedidoWhereInput>
-    Lotes?: LoteListRelationFilter
+    Pedido?: XOR<PedidoNullableScalarRelationFilter, PedidoWhereInput> | null
+    Lote?: LoteListRelationFilter
   }, "IdProduto">
 
   export type ProdutoOrderByWithAggregationInput = {
@@ -14752,7 +14779,7 @@ export namespace Prisma {
     Nome?: SortOrder
     Quantidade?: SortOrder
     Tipo?: SortOrder
-    PedidoId?: SortOrder
+    PedidoId?: SortOrderInput | SortOrder
     _count?: ProdutoCountOrderByAggregateInput
     _avg?: ProdutoAvgOrderByAggregateInput
     _max?: ProdutoMaxOrderByAggregateInput
@@ -14768,7 +14795,7 @@ export namespace Prisma {
     Nome?: StringWithAggregatesFilter<"Produto"> | string
     Quantidade?: IntWithAggregatesFilter<"Produto"> | number
     Tipo?: EnumTipoDeProdutoWithAggregatesFilter<"Produto"> | $Enums.TipoDeProduto
-    PedidoId?: IntWithAggregatesFilter<"Produto"> | number
+    PedidoId?: IntNullableWithAggregatesFilter<"Produto"> | number | null
   }
 
   export type LoteWhereInput = {
@@ -15252,8 +15279,8 @@ export namespace Prisma {
     Quantidade: number
     Tipo: $Enums.TipoDeProduto
     ProdutoLote?: ProdutoLoteCreateNestedManyWithoutProdutoInput
-    Pedido: PedidoCreateNestedOneWithoutProdutosInput
-    Lotes?: LoteCreateNestedManyWithoutProdutosInput
+    Pedido?: PedidoCreateNestedOneWithoutProdutosInput
+    Lote?: LoteCreateNestedManyWithoutProdutosInput
   }
 
   export type ProdutoUncheckedCreateInput = {
@@ -15261,9 +15288,9 @@ export namespace Prisma {
     Nome: string
     Quantidade: number
     Tipo: $Enums.TipoDeProduto
-    PedidoId: number
+    PedidoId?: number | null
     ProdutoLote?: ProdutoLoteUncheckedCreateNestedManyWithoutProdutoInput
-    Lotes?: LoteUncheckedCreateNestedManyWithoutProdutosInput
+    Lote?: LoteUncheckedCreateNestedManyWithoutProdutosInput
   }
 
   export type ProdutoUpdateInput = {
@@ -15271,8 +15298,8 @@ export namespace Prisma {
     Quantidade?: IntFieldUpdateOperationsInput | number
     Tipo?: EnumTipoDeProdutoFieldUpdateOperationsInput | $Enums.TipoDeProduto
     ProdutoLote?: ProdutoLoteUpdateManyWithoutProdutoNestedInput
-    Pedido?: PedidoUpdateOneRequiredWithoutProdutosNestedInput
-    Lotes?: LoteUpdateManyWithoutProdutosNestedInput
+    Pedido?: PedidoUpdateOneWithoutProdutosNestedInput
+    Lote?: LoteUpdateManyWithoutProdutosNestedInput
   }
 
   export type ProdutoUncheckedUpdateInput = {
@@ -15280,9 +15307,9 @@ export namespace Prisma {
     Nome?: StringFieldUpdateOperationsInput | string
     Quantidade?: IntFieldUpdateOperationsInput | number
     Tipo?: EnumTipoDeProdutoFieldUpdateOperationsInput | $Enums.TipoDeProduto
-    PedidoId?: IntFieldUpdateOperationsInput | number
+    PedidoId?: NullableIntFieldUpdateOperationsInput | number | null
     ProdutoLote?: ProdutoLoteUncheckedUpdateManyWithoutProdutoNestedInput
-    Lotes?: LoteUncheckedUpdateManyWithoutProdutosNestedInput
+    Lote?: LoteUncheckedUpdateManyWithoutProdutosNestedInput
   }
 
   export type ProdutoCreateManyInput = {
@@ -15290,7 +15317,7 @@ export namespace Prisma {
     Nome: string
     Quantidade: number
     Tipo: $Enums.TipoDeProduto
-    PedidoId: number
+    PedidoId?: number | null
   }
 
   export type ProdutoUpdateManyMutationInput = {
@@ -15304,7 +15331,7 @@ export namespace Prisma {
     Nome?: StringFieldUpdateOperationsInput | string
     Quantidade?: IntFieldUpdateOperationsInput | number
     Tipo?: EnumTipoDeProdutoFieldUpdateOperationsInput | $Enums.TipoDeProduto
-    PedidoId?: IntFieldUpdateOperationsInput | number
+    PedidoId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type LoteCreateInput = {
@@ -15312,7 +15339,7 @@ export namespace Prisma {
     Quantidade: number
     Estoque: EstoqueCreateNestedOneWithoutLotesInput
     ProdutoLote?: ProdutoLoteCreateNestedManyWithoutLoteInput
-    Produtos?: ProdutoCreateNestedManyWithoutLotesInput
+    Produtos?: ProdutoCreateNestedManyWithoutLoteInput
   }
 
   export type LoteUncheckedCreateInput = {
@@ -15321,7 +15348,7 @@ export namespace Prisma {
     Quantidade: number
     EstoqueId: number
     ProdutoLote?: ProdutoLoteUncheckedCreateNestedManyWithoutLoteInput
-    Produtos?: ProdutoUncheckedCreateNestedManyWithoutLotesInput
+    Produtos?: ProdutoUncheckedCreateNestedManyWithoutLoteInput
   }
 
   export type LoteUpdateInput = {
@@ -15329,7 +15356,7 @@ export namespace Prisma {
     Quantidade?: IntFieldUpdateOperationsInput | number
     Estoque?: EstoqueUpdateOneRequiredWithoutLotesNestedInput
     ProdutoLote?: ProdutoLoteUpdateManyWithoutLoteNestedInput
-    Produtos?: ProdutoUpdateManyWithoutLotesNestedInput
+    Produtos?: ProdutoUpdateManyWithoutLoteNestedInput
   }
 
   export type LoteUncheckedUpdateInput = {
@@ -15338,7 +15365,7 @@ export namespace Prisma {
     Quantidade?: IntFieldUpdateOperationsInput | number
     EstoqueId?: IntFieldUpdateOperationsInput | number
     ProdutoLote?: ProdutoLoteUncheckedUpdateManyWithoutLoteNestedInput
-    Produtos?: ProdutoUncheckedUpdateManyWithoutLotesNestedInput
+    Produtos?: ProdutoUncheckedUpdateManyWithoutLoteNestedInput
   }
 
   export type LoteCreateManyInput = {
@@ -15816,21 +15843,37 @@ export namespace Prisma {
     not?: NestedEnumTipoDeProdutoFilter<$PrismaModel> | $Enums.TipoDeProduto
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type ProdutoLoteListRelationFilter = {
     every?: ProdutoLoteWhereInput
     some?: ProdutoLoteWhereInput
     none?: ProdutoLoteWhereInput
   }
 
-  export type PedidoScalarRelationFilter = {
-    is?: PedidoWhereInput
-    isNot?: PedidoWhereInput
+  export type PedidoNullableScalarRelationFilter = {
+    is?: PedidoWhereInput | null
+    isNot?: PedidoWhereInput | null
   }
 
   export type LoteListRelationFilter = {
     every?: LoteWhereInput
     some?: LoteWhereInput
     none?: LoteWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type ProdutoLoteOrderByRelationAggregateInput = {
@@ -15885,6 +15928,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumTipoDeProdutoFilter<$PrismaModel>
     _max?: NestedEnumTipoDeProdutoFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -16473,10 +16532,12 @@ export namespace Prisma {
     deleteMany?: ProdutoLoteScalarWhereInput | ProdutoLoteScalarWhereInput[]
   }
 
-  export type PedidoUpdateOneRequiredWithoutProdutosNestedInput = {
+  export type PedidoUpdateOneWithoutProdutosNestedInput = {
     create?: XOR<PedidoCreateWithoutProdutosInput, PedidoUncheckedCreateWithoutProdutosInput>
     connectOrCreate?: PedidoCreateOrConnectWithoutProdutosInput
     upsert?: PedidoUpsertWithoutProdutosInput
+    disconnect?: PedidoWhereInput | boolean
+    delete?: PedidoWhereInput | boolean
     connect?: PedidoWhereUniqueInput
     update?: XOR<XOR<PedidoUpdateToOneWithWhereWithoutProdutosInput, PedidoUpdateWithoutProdutosInput>, PedidoUncheckedUpdateWithoutProdutosInput>
   }
@@ -16492,6 +16553,14 @@ export namespace Prisma {
     update?: LoteUpdateWithWhereUniqueWithoutProdutosInput | LoteUpdateWithWhereUniqueWithoutProdutosInput[]
     updateMany?: LoteUpdateManyWithWhereWithoutProdutosInput | LoteUpdateManyWithWhereWithoutProdutosInput[]
     deleteMany?: LoteScalarWhereInput | LoteScalarWhereInput[]
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type ProdutoLoteUncheckedUpdateManyWithoutProdutoNestedInput = {
@@ -16534,9 +16603,9 @@ export namespace Prisma {
     connect?: ProdutoLoteWhereUniqueInput | ProdutoLoteWhereUniqueInput[]
   }
 
-  export type ProdutoCreateNestedManyWithoutLotesInput = {
-    create?: XOR<ProdutoCreateWithoutLotesInput, ProdutoUncheckedCreateWithoutLotesInput> | ProdutoCreateWithoutLotesInput[] | ProdutoUncheckedCreateWithoutLotesInput[]
-    connectOrCreate?: ProdutoCreateOrConnectWithoutLotesInput | ProdutoCreateOrConnectWithoutLotesInput[]
+  export type ProdutoCreateNestedManyWithoutLoteInput = {
+    create?: XOR<ProdutoCreateWithoutLoteInput, ProdutoUncheckedCreateWithoutLoteInput> | ProdutoCreateWithoutLoteInput[] | ProdutoUncheckedCreateWithoutLoteInput[]
+    connectOrCreate?: ProdutoCreateOrConnectWithoutLoteInput | ProdutoCreateOrConnectWithoutLoteInput[]
     connect?: ProdutoWhereUniqueInput | ProdutoWhereUniqueInput[]
   }
 
@@ -16547,9 +16616,9 @@ export namespace Prisma {
     connect?: ProdutoLoteWhereUniqueInput | ProdutoLoteWhereUniqueInput[]
   }
 
-  export type ProdutoUncheckedCreateNestedManyWithoutLotesInput = {
-    create?: XOR<ProdutoCreateWithoutLotesInput, ProdutoUncheckedCreateWithoutLotesInput> | ProdutoCreateWithoutLotesInput[] | ProdutoUncheckedCreateWithoutLotesInput[]
-    connectOrCreate?: ProdutoCreateOrConnectWithoutLotesInput | ProdutoCreateOrConnectWithoutLotesInput[]
+  export type ProdutoUncheckedCreateNestedManyWithoutLoteInput = {
+    create?: XOR<ProdutoCreateWithoutLoteInput, ProdutoUncheckedCreateWithoutLoteInput> | ProdutoCreateWithoutLoteInput[] | ProdutoUncheckedCreateWithoutLoteInput[]
+    connectOrCreate?: ProdutoCreateOrConnectWithoutLoteInput | ProdutoCreateOrConnectWithoutLoteInput[]
     connect?: ProdutoWhereUniqueInput | ProdutoWhereUniqueInput[]
   }
 
@@ -16579,16 +16648,16 @@ export namespace Prisma {
     deleteMany?: ProdutoLoteScalarWhereInput | ProdutoLoteScalarWhereInput[]
   }
 
-  export type ProdutoUpdateManyWithoutLotesNestedInput = {
-    create?: XOR<ProdutoCreateWithoutLotesInput, ProdutoUncheckedCreateWithoutLotesInput> | ProdutoCreateWithoutLotesInput[] | ProdutoUncheckedCreateWithoutLotesInput[]
-    connectOrCreate?: ProdutoCreateOrConnectWithoutLotesInput | ProdutoCreateOrConnectWithoutLotesInput[]
-    upsert?: ProdutoUpsertWithWhereUniqueWithoutLotesInput | ProdutoUpsertWithWhereUniqueWithoutLotesInput[]
+  export type ProdutoUpdateManyWithoutLoteNestedInput = {
+    create?: XOR<ProdutoCreateWithoutLoteInput, ProdutoUncheckedCreateWithoutLoteInput> | ProdutoCreateWithoutLoteInput[] | ProdutoUncheckedCreateWithoutLoteInput[]
+    connectOrCreate?: ProdutoCreateOrConnectWithoutLoteInput | ProdutoCreateOrConnectWithoutLoteInput[]
+    upsert?: ProdutoUpsertWithWhereUniqueWithoutLoteInput | ProdutoUpsertWithWhereUniqueWithoutLoteInput[]
     set?: ProdutoWhereUniqueInput | ProdutoWhereUniqueInput[]
     disconnect?: ProdutoWhereUniqueInput | ProdutoWhereUniqueInput[]
     delete?: ProdutoWhereUniqueInput | ProdutoWhereUniqueInput[]
     connect?: ProdutoWhereUniqueInput | ProdutoWhereUniqueInput[]
-    update?: ProdutoUpdateWithWhereUniqueWithoutLotesInput | ProdutoUpdateWithWhereUniqueWithoutLotesInput[]
-    updateMany?: ProdutoUpdateManyWithWhereWithoutLotesInput | ProdutoUpdateManyWithWhereWithoutLotesInput[]
+    update?: ProdutoUpdateWithWhereUniqueWithoutLoteInput | ProdutoUpdateWithWhereUniqueWithoutLoteInput[]
+    updateMany?: ProdutoUpdateManyWithWhereWithoutLoteInput | ProdutoUpdateManyWithWhereWithoutLoteInput[]
     deleteMany?: ProdutoScalarWhereInput | ProdutoScalarWhereInput[]
   }
 
@@ -16606,16 +16675,16 @@ export namespace Prisma {
     deleteMany?: ProdutoLoteScalarWhereInput | ProdutoLoteScalarWhereInput[]
   }
 
-  export type ProdutoUncheckedUpdateManyWithoutLotesNestedInput = {
-    create?: XOR<ProdutoCreateWithoutLotesInput, ProdutoUncheckedCreateWithoutLotesInput> | ProdutoCreateWithoutLotesInput[] | ProdutoUncheckedCreateWithoutLotesInput[]
-    connectOrCreate?: ProdutoCreateOrConnectWithoutLotesInput | ProdutoCreateOrConnectWithoutLotesInput[]
-    upsert?: ProdutoUpsertWithWhereUniqueWithoutLotesInput | ProdutoUpsertWithWhereUniqueWithoutLotesInput[]
+  export type ProdutoUncheckedUpdateManyWithoutLoteNestedInput = {
+    create?: XOR<ProdutoCreateWithoutLoteInput, ProdutoUncheckedCreateWithoutLoteInput> | ProdutoCreateWithoutLoteInput[] | ProdutoUncheckedCreateWithoutLoteInput[]
+    connectOrCreate?: ProdutoCreateOrConnectWithoutLoteInput | ProdutoCreateOrConnectWithoutLoteInput[]
+    upsert?: ProdutoUpsertWithWhereUniqueWithoutLoteInput | ProdutoUpsertWithWhereUniqueWithoutLoteInput[]
     set?: ProdutoWhereUniqueInput | ProdutoWhereUniqueInput[]
     disconnect?: ProdutoWhereUniqueInput | ProdutoWhereUniqueInput[]
     delete?: ProdutoWhereUniqueInput | ProdutoWhereUniqueInput[]
     connect?: ProdutoWhereUniqueInput | ProdutoWhereUniqueInput[]
-    update?: ProdutoUpdateWithWhereUniqueWithoutLotesInput | ProdutoUpdateWithWhereUniqueWithoutLotesInput[]
-    updateMany?: ProdutoUpdateManyWithWhereWithoutLotesInput | ProdutoUpdateManyWithWhereWithoutLotesInput[]
+    update?: ProdutoUpdateWithWhereUniqueWithoutLoteInput | ProdutoUpdateWithWhereUniqueWithoutLoteInput[]
+    updateMany?: ProdutoUpdateManyWithWhereWithoutLoteInput | ProdutoUpdateManyWithWhereWithoutLoteInput[]
     deleteMany?: ProdutoScalarWhereInput | ProdutoScalarWhereInput[]
   }
 
@@ -16938,6 +17007,17 @@ export namespace Prisma {
     not?: NestedEnumTipoDeProdutoFilter<$PrismaModel> | $Enums.TipoDeProduto
   }
 
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedEnumTipoDeProdutoWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.TipoDeProduto | EnumTipoDeProdutoFieldRefInput<$PrismaModel>
     in?: $Enums.TipoDeProduto[] | ListEnumTipoDeProdutoFieldRefInput<$PrismaModel>
@@ -16946,6 +17026,33 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumTipoDeProdutoFilter<$PrismaModel>
     _max?: NestedEnumTipoDeProdutoFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -17662,26 +17769,26 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type ProdutoCreateWithoutLotesInput = {
+  export type ProdutoCreateWithoutLoteInput = {
     Nome: string
     Quantidade: number
     Tipo: $Enums.TipoDeProduto
     ProdutoLote?: ProdutoLoteCreateNestedManyWithoutProdutoInput
-    Pedido: PedidoCreateNestedOneWithoutProdutosInput
+    Pedido?: PedidoCreateNestedOneWithoutProdutosInput
   }
 
-  export type ProdutoUncheckedCreateWithoutLotesInput = {
+  export type ProdutoUncheckedCreateWithoutLoteInput = {
     IdProduto?: number
     Nome: string
     Quantidade: number
     Tipo: $Enums.TipoDeProduto
-    PedidoId: number
+    PedidoId?: number | null
     ProdutoLote?: ProdutoLoteUncheckedCreateNestedManyWithoutProdutoInput
   }
 
-  export type ProdutoCreateOrConnectWithoutLotesInput = {
+  export type ProdutoCreateOrConnectWithoutLoteInput = {
     where: ProdutoWhereUniqueInput
-    create: XOR<ProdutoCreateWithoutLotesInput, ProdutoUncheckedCreateWithoutLotesInput>
+    create: XOR<ProdutoCreateWithoutLoteInput, ProdutoUncheckedCreateWithoutLoteInput>
   }
 
   export type EstoqueUpsertWithoutLotesInput = {
@@ -17722,20 +17829,20 @@ export namespace Prisma {
     data: XOR<ProdutoLoteUpdateManyMutationInput, ProdutoLoteUncheckedUpdateManyWithoutLoteInput>
   }
 
-  export type ProdutoUpsertWithWhereUniqueWithoutLotesInput = {
+  export type ProdutoUpsertWithWhereUniqueWithoutLoteInput = {
     where: ProdutoWhereUniqueInput
-    update: XOR<ProdutoUpdateWithoutLotesInput, ProdutoUncheckedUpdateWithoutLotesInput>
-    create: XOR<ProdutoCreateWithoutLotesInput, ProdutoUncheckedCreateWithoutLotesInput>
+    update: XOR<ProdutoUpdateWithoutLoteInput, ProdutoUncheckedUpdateWithoutLoteInput>
+    create: XOR<ProdutoCreateWithoutLoteInput, ProdutoUncheckedCreateWithoutLoteInput>
   }
 
-  export type ProdutoUpdateWithWhereUniqueWithoutLotesInput = {
+  export type ProdutoUpdateWithWhereUniqueWithoutLoteInput = {
     where: ProdutoWhereUniqueInput
-    data: XOR<ProdutoUpdateWithoutLotesInput, ProdutoUncheckedUpdateWithoutLotesInput>
+    data: XOR<ProdutoUpdateWithoutLoteInput, ProdutoUncheckedUpdateWithoutLoteInput>
   }
 
-  export type ProdutoUpdateManyWithWhereWithoutLotesInput = {
+  export type ProdutoUpdateManyWithWhereWithoutLoteInput = {
     where: ProdutoScalarWhereInput
-    data: XOR<ProdutoUpdateManyMutationInput, ProdutoUncheckedUpdateManyWithoutLotesInput>
+    data: XOR<ProdutoUpdateManyMutationInput, ProdutoUncheckedUpdateManyWithoutLoteInput>
   }
 
   export type ProdutoScalarWhereInput = {
@@ -17746,15 +17853,15 @@ export namespace Prisma {
     Nome?: StringFilter<"Produto"> | string
     Quantidade?: IntFilter<"Produto"> | number
     Tipo?: EnumTipoDeProdutoFilter<"Produto"> | $Enums.TipoDeProduto
-    PedidoId?: IntFilter<"Produto"> | number
+    PedidoId?: IntNullableFilter<"Produto"> | number | null
   }
 
   export type ProdutoCreateWithoutProdutoLoteInput = {
     Nome: string
     Quantidade: number
     Tipo: $Enums.TipoDeProduto
-    Pedido: PedidoCreateNestedOneWithoutProdutosInput
-    Lotes?: LoteCreateNestedManyWithoutProdutosInput
+    Pedido?: PedidoCreateNestedOneWithoutProdutosInput
+    Lote?: LoteCreateNestedManyWithoutProdutosInput
   }
 
   export type ProdutoUncheckedCreateWithoutProdutoLoteInput = {
@@ -17762,8 +17869,8 @@ export namespace Prisma {
     Nome: string
     Quantidade: number
     Tipo: $Enums.TipoDeProduto
-    PedidoId: number
-    Lotes?: LoteUncheckedCreateNestedManyWithoutProdutosInput
+    PedidoId?: number | null
+    Lote?: LoteUncheckedCreateNestedManyWithoutProdutosInput
   }
 
   export type ProdutoCreateOrConnectWithoutProdutoLoteInput = {
@@ -17775,7 +17882,7 @@ export namespace Prisma {
     Data: Date | string
     Quantidade: number
     Estoque: EstoqueCreateNestedOneWithoutLotesInput
-    Produtos?: ProdutoCreateNestedManyWithoutLotesInput
+    Produtos?: ProdutoCreateNestedManyWithoutLoteInput
   }
 
   export type LoteUncheckedCreateWithoutProdutoLoteInput = {
@@ -17783,7 +17890,7 @@ export namespace Prisma {
     Data: Date | string
     Quantidade: number
     EstoqueId: number
-    Produtos?: ProdutoUncheckedCreateNestedManyWithoutLotesInput
+    Produtos?: ProdutoUncheckedCreateNestedManyWithoutLoteInput
   }
 
   export type LoteCreateOrConnectWithoutProdutoLoteInput = {
@@ -17806,8 +17913,8 @@ export namespace Prisma {
     Nome?: StringFieldUpdateOperationsInput | string
     Quantidade?: IntFieldUpdateOperationsInput | number
     Tipo?: EnumTipoDeProdutoFieldUpdateOperationsInput | $Enums.TipoDeProduto
-    Pedido?: PedidoUpdateOneRequiredWithoutProdutosNestedInput
-    Lotes?: LoteUpdateManyWithoutProdutosNestedInput
+    Pedido?: PedidoUpdateOneWithoutProdutosNestedInput
+    Lote?: LoteUpdateManyWithoutProdutosNestedInput
   }
 
   export type ProdutoUncheckedUpdateWithoutProdutoLoteInput = {
@@ -17815,8 +17922,8 @@ export namespace Prisma {
     Nome?: StringFieldUpdateOperationsInput | string
     Quantidade?: IntFieldUpdateOperationsInput | number
     Tipo?: EnumTipoDeProdutoFieldUpdateOperationsInput | $Enums.TipoDeProduto
-    PedidoId?: IntFieldUpdateOperationsInput | number
-    Lotes?: LoteUncheckedUpdateManyWithoutProdutosNestedInput
+    PedidoId?: NullableIntFieldUpdateOperationsInput | number | null
+    Lote?: LoteUncheckedUpdateManyWithoutProdutosNestedInput
   }
 
   export type LoteUpsertWithoutProdutoLoteInput = {
@@ -17834,7 +17941,7 @@ export namespace Prisma {
     Data?: DateTimeFieldUpdateOperationsInput | Date | string
     Quantidade?: IntFieldUpdateOperationsInput | number
     Estoque?: EstoqueUpdateOneRequiredWithoutLotesNestedInput
-    Produtos?: ProdutoUpdateManyWithoutLotesNestedInput
+    Produtos?: ProdutoUpdateManyWithoutLoteNestedInput
   }
 
   export type LoteUncheckedUpdateWithoutProdutoLoteInput = {
@@ -17842,14 +17949,14 @@ export namespace Prisma {
     Data?: DateTimeFieldUpdateOperationsInput | Date | string
     Quantidade?: IntFieldUpdateOperationsInput | number
     EstoqueId?: IntFieldUpdateOperationsInput | number
-    Produtos?: ProdutoUncheckedUpdateManyWithoutLotesNestedInput
+    Produtos?: ProdutoUncheckedUpdateManyWithoutLoteNestedInput
   }
 
   export type LoteCreateWithoutEstoqueInput = {
     Data: Date | string
     Quantidade: number
     ProdutoLote?: ProdutoLoteCreateNestedManyWithoutLoteInput
-    Produtos?: ProdutoCreateNestedManyWithoutLotesInput
+    Produtos?: ProdutoCreateNestedManyWithoutLoteInput
   }
 
   export type LoteUncheckedCreateWithoutEstoqueInput = {
@@ -17857,7 +17964,7 @@ export namespace Prisma {
     Data: Date | string
     Quantidade: number
     ProdutoLote?: ProdutoLoteUncheckedCreateNestedManyWithoutLoteInput
-    Produtos?: ProdutoUncheckedCreateNestedManyWithoutLotesInput
+    Produtos?: ProdutoUncheckedCreateNestedManyWithoutLoteInput
   }
 
   export type LoteCreateOrConnectWithoutEstoqueInput = {
@@ -17891,7 +17998,7 @@ export namespace Prisma {
     Quantidade: number
     Tipo: $Enums.TipoDeProduto
     ProdutoLote?: ProdutoLoteCreateNestedManyWithoutProdutoInput
-    Lotes?: LoteCreateNestedManyWithoutProdutosInput
+    Lote?: LoteCreateNestedManyWithoutProdutosInput
   }
 
   export type ProdutoUncheckedCreateWithoutPedidoInput = {
@@ -17900,7 +18007,7 @@ export namespace Prisma {
     Quantidade: number
     Tipo: $Enums.TipoDeProduto
     ProdutoLote?: ProdutoLoteUncheckedCreateNestedManyWithoutProdutoInput
-    Lotes?: LoteUncheckedCreateNestedManyWithoutProdutosInput
+    Lote?: LoteUncheckedCreateNestedManyWithoutProdutosInput
   }
 
   export type ProdutoCreateOrConnectWithoutPedidoInput = {
@@ -18208,29 +18315,29 @@ export namespace Prisma {
     produtoId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type ProdutoUpdateWithoutLotesInput = {
+  export type ProdutoUpdateWithoutLoteInput = {
     Nome?: StringFieldUpdateOperationsInput | string
     Quantidade?: IntFieldUpdateOperationsInput | number
     Tipo?: EnumTipoDeProdutoFieldUpdateOperationsInput | $Enums.TipoDeProduto
     ProdutoLote?: ProdutoLoteUpdateManyWithoutProdutoNestedInput
-    Pedido?: PedidoUpdateOneRequiredWithoutProdutosNestedInput
+    Pedido?: PedidoUpdateOneWithoutProdutosNestedInput
   }
 
-  export type ProdutoUncheckedUpdateWithoutLotesInput = {
+  export type ProdutoUncheckedUpdateWithoutLoteInput = {
     IdProduto?: IntFieldUpdateOperationsInput | number
     Nome?: StringFieldUpdateOperationsInput | string
     Quantidade?: IntFieldUpdateOperationsInput | number
     Tipo?: EnumTipoDeProdutoFieldUpdateOperationsInput | $Enums.TipoDeProduto
-    PedidoId?: IntFieldUpdateOperationsInput | number
+    PedidoId?: NullableIntFieldUpdateOperationsInput | number | null
     ProdutoLote?: ProdutoLoteUncheckedUpdateManyWithoutProdutoNestedInput
   }
 
-  export type ProdutoUncheckedUpdateManyWithoutLotesInput = {
+  export type ProdutoUncheckedUpdateManyWithoutLoteInput = {
     IdProduto?: IntFieldUpdateOperationsInput | number
     Nome?: StringFieldUpdateOperationsInput | string
     Quantidade?: IntFieldUpdateOperationsInput | number
     Tipo?: EnumTipoDeProdutoFieldUpdateOperationsInput | $Enums.TipoDeProduto
-    PedidoId?: IntFieldUpdateOperationsInput | number
+    PedidoId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type LoteCreateManyEstoqueInput = {
@@ -18243,7 +18350,7 @@ export namespace Prisma {
     Data?: DateTimeFieldUpdateOperationsInput | Date | string
     Quantidade?: IntFieldUpdateOperationsInput | number
     ProdutoLote?: ProdutoLoteUpdateManyWithoutLoteNestedInput
-    Produtos?: ProdutoUpdateManyWithoutLotesNestedInput
+    Produtos?: ProdutoUpdateManyWithoutLoteNestedInput
   }
 
   export type LoteUncheckedUpdateWithoutEstoqueInput = {
@@ -18251,7 +18358,7 @@ export namespace Prisma {
     Data?: DateTimeFieldUpdateOperationsInput | Date | string
     Quantidade?: IntFieldUpdateOperationsInput | number
     ProdutoLote?: ProdutoLoteUncheckedUpdateManyWithoutLoteNestedInput
-    Produtos?: ProdutoUncheckedUpdateManyWithoutLotesNestedInput
+    Produtos?: ProdutoUncheckedUpdateManyWithoutLoteNestedInput
   }
 
   export type LoteUncheckedUpdateManyWithoutEstoqueInput = {
@@ -18272,7 +18379,7 @@ export namespace Prisma {
     Quantidade?: IntFieldUpdateOperationsInput | number
     Tipo?: EnumTipoDeProdutoFieldUpdateOperationsInput | $Enums.TipoDeProduto
     ProdutoLote?: ProdutoLoteUpdateManyWithoutProdutoNestedInput
-    Lotes?: LoteUpdateManyWithoutProdutosNestedInput
+    Lote?: LoteUpdateManyWithoutProdutosNestedInput
   }
 
   export type ProdutoUncheckedUpdateWithoutPedidoInput = {
@@ -18281,7 +18388,7 @@ export namespace Prisma {
     Quantidade?: IntFieldUpdateOperationsInput | number
     Tipo?: EnumTipoDeProdutoFieldUpdateOperationsInput | $Enums.TipoDeProduto
     ProdutoLote?: ProdutoLoteUncheckedUpdateManyWithoutProdutoNestedInput
-    Lotes?: LoteUncheckedUpdateManyWithoutProdutosNestedInput
+    Lote?: LoteUncheckedUpdateManyWithoutProdutosNestedInput
   }
 
   export type ProdutoUncheckedUpdateManyWithoutPedidoInput = {

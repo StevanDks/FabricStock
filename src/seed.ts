@@ -1,4 +1,5 @@
 import { PrismaClient, TipoDeUsuario, StatusPedido, TipoDeProduto } from '../generated/prisma';
+import argon2 from 'argon2';
 
 const prisma = new PrismaClient();
 
@@ -25,7 +26,7 @@ async function main() {
         create: {
             Nome: 'Admin Stevan',
             Email: 'admin@example.com',
-            Senha: 'senhaSuperSegura123',
+            Senha: await argon2.hash('senhaSuperSegura123'),
             NiveldePermissao: 3,
             TipoDeUsuario: TipoDeUsuario.Administrador,
             Administrador: { create: {} },
@@ -38,7 +39,7 @@ async function main() {
         create: {
             Nome: 'Carlos Estoque',
             Email: 'estoque@example.com',
-            Senha: 'senhaCarlos123',
+            Senha: await argon2.hash('senhaCarlos123'),
             NiveldePermissao: 2,
             TipoDeUsuario: TipoDeUsuario.GerenteDeEstoque,
             GerenteDeEstoque: { create: {} },
@@ -51,7 +52,7 @@ async function main() {
         create: {
             Nome: 'Fernanda Producao',
             Email: 'producao@example.com',
-            Senha: 'senhaFernanda123',
+            Senha: await argon2.hash('senhaFernanda123'),
             NiveldePermissao: 2,
             TipoDeUsuario: TipoDeUsuario.GerenteDeProducao,
             GerenteDeProducao: { create: {} },
@@ -67,7 +68,7 @@ async function main() {
         create: {
             Nome: 'Fornecedor XYZ',
             Email: 'fornecedor@example.com',
-            Senha: 'senhaFornecedor123',
+            Senha: await argon2.hash('senhaFornecedor123'),
             NiveldePermissao: 1,
             TipoDeUsuario: TipoDeUsuario.Fornecedor,
             Fornecedor: {

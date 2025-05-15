@@ -67,10 +67,10 @@ model Produto {
   Nome        String
   Quantidade  Int
   Tipo        TipoDeProduto
-  PedidoId    Int
+  PedidoId    Int?
   ProdutoLote ProdutoLote[]
-  Pedido      Pedido        @relation(fields: [PedidoId], references: [IdPedido])
-  Lotes       Lote[]        @relation("ProdutoLotes")
+  Pedido      Pedido?       @relation(fields: [PedidoId], references: [IdPedido])
+  Lote        Lote[]        @relation("ProdutoLotes")
 }
 
 model Lote {
