@@ -1,4 +1,5 @@
 import { PrismaClient, GerenteDeProducao, TipoDeUsuario, StatusPedido } from '../../generated/prisma';
+import argon2 from 'argon2';
 const prisma = new PrismaClient();
 
 export const getAllGerentesDeProducao = async () => {
@@ -27,20 +28,21 @@ export const createGerenteDeProducao = async (data: {
     NiveldePermissao: number;
     TipoDeUsuario: TipoDeUsuario;
 }) => {
-    const { Nome, Email, Senha, NiveldePermissao, TipoDeUsuario} = data;
+    const { Nome, Email, Senha, NiveldePermissao, TipoDeUsuario } = data;
     const existingUser = await prisma.usuario.findUnique({
         where: { Email },
     });
     if (existingUser) {
         throw new Error('E-mail já está em uso.');
     }
+    const hashSenha = await argon2.hash(Senha);
     return await prisma.gerenteDeProducao.create({
         data: {
             Usuario: {
                 create: {
                     Nome,
                     Email,
-                    Senha,
+                    Senha: hashSenha,
                     NiveldePermissao,
                     TipoDeUsuario,
                 },
@@ -79,6 +81,10 @@ export const updateGerenteDeProducao = async (
         };
     }
 ): Promise<GerenteDeProducao> => {
+    if (data.Usuario?.update?.Senha) {
+        data.Usuario.update.Senha = await argon2.hash(data.Usuario.update.Senha);
+    }
+    
     return prisma.gerenteDeProducao.update({
         where: { IdGerenteDeProducao: id },
         data,
